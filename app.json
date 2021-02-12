@@ -1,32 +1,45 @@
 {
   "expo": {
-    "name": "Getiiit",
-    "slug": "Getiiit",
+    "name": "GetIt",
+    "slug": "GetIt",
+    "platforms": ["ios", "android", "web"],
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./app/assets/icon.png",
     "splash": {
-      "image": "./assets/splash.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "image": "./app/assets/splash.png",
+      "resizeMode": "cover",
+      "backgroundColor": "#e63c4b"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.codewithmosh.donewithit",
+      "buildNumber": "1.0.0"
     },
     "android": {
-      "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#FFFFFF"
+      "package": "com.codewithmosh.donewithit",
+      "versionCode": 1
+    },
+    "description": "A marketplace for selling the stuff you don't need anymore.",
+    "notification": {
+      "iosDisplayInForeground": true
+    },
+    "extra": {
+      "bugsnag": {
+        "apiKey": "adf823935c5c30735c85545b337a21ab"
       }
     },
-    "web": {
-      "favicon": "./assets/favicon.png"
+    "hooks": {
+      "postPublish": [
+        {
+          "file": "@bugsnag/expo/hooks/post-publish.js",
+          "config": {}
+        }
+      ]
     }
   }
 }
