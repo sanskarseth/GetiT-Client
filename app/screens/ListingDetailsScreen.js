@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
 	View,
 	StyleSheet,
@@ -13,9 +13,24 @@ import ContactSellerForm from '../components/ContactSellerForm';
 import ListItem from '../components/lists/ListItem';
 import Text from '../components/Text';
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
+import userApi from '../api/user';
 
 function ListingDetailsScreen({ route }) {
 	const listing = route.params;
+	const users = useApi(userApi.getUser);
+
+	useEffect(() => {
+		users.request();
+	}, []);
+
+	const getUser = (id) => {
+		// console.log(id);
+		const user = users.data.find((x) => x._id === id);
+		// console.log(user);
+
+		if (user == undefined) return 'Seller';
+		return user.name;
+	};
 
 	return (
 		<KeyboardAvoidingView
@@ -30,12 +45,12 @@ function ListingDetailsScreen({ route }) {
 			/>
 			<View style={styles.detailsContainer}>
 				<Text style={styles.title}>{listing.title}</Text>
-				<Text style={styles.price}>${listing.price}</Text>
+				<Text style={styles.price}>₹{listing.price}</Text>
 				<View style={styles.userContainer}>
 					<ListItem
-						image={require('../assets/sanskar.jpg')}
-						title="Sanskar"
-						subTitle="5 Listings"
+						image={require('../assets/user.jpg')}
+						title={getUser(listing.userId)}
+						// subTitle="5 Listings"
 					/>
 				</View>
 				<ContactSellerForm listing={listing} />

@@ -1,50 +1,57 @@
-import React from "react";
-import { Alert, Keyboard } from "react-native";
-import { Notifications } from "expo";
-import * as Yup from "yup";
+import React from 'react';
+import { Alert, Keyboard } from 'react-native';
+import { Notifications } from 'expo';
+import * as Yup from 'yup';
 
-import { Form, FormField, SubmitButton } from "./forms";
-import messagesApi from "../api/messages";
+import { Form, FormField, SubmitButton } from './forms';
+import messagesApi from '../api/messages';
 
 function ContactSellerForm({ listing }) {
-  const handleSubmit = async ({ message }, { resetForm }) => {
-    Keyboard.dismiss();
+	const handleSubmit = async ({ message }, { resetForm }) => {
+		try {
+			Keyboard.dismiss();
 
-    const result = await messagesApi.send(message, listing.id);
+			const result = await messagesApi.send(message, listing._id);
 
-    if (!result.ok) {
-      console.log("Error", result);
-      return Alert.alert("Error", "Could not send the message to the seller.");
-    }
+			if (!result.ok) {
+				console.log('Error', result);
+				return Alert.alert(
+					'Error',
+					'Could not send the message to the seller.'
+				);
+			}
 
-    resetForm();
+			resetForm();
 
-    Notifications.presentLocalNotificationAsync({
-      title: "Awesome!",
-      body: "Your message was sent to the seller.",
-    });
-  };
+			Notifications.presentLocalNotificationAsync({
+				title: 'Awesome!',
+				body: 'Your message was sent to the seller.',
+			});
+		} catch (ex) {
+			console.log(ex);
+		}
+	};
 
-  return (
-    <Form
-      initialValues={{ message: "" }}
-      onSubmit={handleSubmit}
-      validationSchema={validationSchema}
-    >
-      <FormField
-        maxLength={255}
-        multiline
-        name="message"
-        numberOfLines={3}
-        placeholder="Message..."
-      />
-      <SubmitButton title="Contact Seller" />
-    </Form>
-  );
+	return (
+		<Form
+			initialValues={{ message: '' }}
+			onSubmit={handleSubmit}
+			validationSchema={validationSchema}
+		>
+			<FormField
+				maxLength={255}
+				multiline
+				name="message"
+				numberOfLines={3}
+				placeholder="Message..."
+			/>
+			<SubmitButton title="Contact Seller" />
+		</Form>
+	);
 }
 
 const validationSchema = Yup.object().shape({
-  message: Yup.string().required().min(1).label("Message"),
+	message: Yup.string().required().min(1).label('Message'),
 });
 
 export default ContactSellerForm;

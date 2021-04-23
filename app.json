@@ -15,31 +15,26 @@
       "fallbackToCacheTimeout": 0
     },
     "assetBundlePatterns": ["**/*"],
-    "ios": {
-      "supportsTablet": true,
-      "bundleIdentifier": "com.codewithmosh.donewithit",
-      "buildNumber": "1.0.0"
+    "android":{
+      "package":"seth.sanskar.GetiT",
+      "versionCode":1
     },
-    "android": {
-      "package": "com.codewithmosh.donewithit",
-      "versionCode": 1
-    },
-    "description": "A marketplace for selling the stuff you don't need anymore.",
+    "description": "Having something! Let's Share...",
     "notification": {
       "iosDisplayInForeground": true
     },
-    "extra": {
-      "bugsnag": {
-        "apiKey": "adf823935c5c30735c85545b337a21ab"
-      }
-    },
-    "hooks": {
-      "postPublish": [
-        {
-          "file": "@bugsnag/expo/hooks/post-publish.js",
-          "config": {}
+      "extra": {
+        "bugsnag": {
+          "apiKey": "adf823935c5c30735c85545b337a21ab"
         }
-      ]
+      },
+      "hooks": {
+        "postPublish": [
+          {
+            "file": "@bugsnag/expo/hooks/post-publish.js",
+            "config": {}
+          }
+        ]
     }
   }
 }

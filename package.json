@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@bugsnag/expo": "^7.6.0",
+    "@react-native-async-storage/async-storage": "^1.15.3",
     "@react-native-community/masked-view": "0.1.10",
     "@react-native-community/netinfo": "5.9.2",
     "@react-navigation/bottom-tabs": "^5.11.7",
@@ -27,6 +28,7 @@
     "formik": "^2.2.6",
     "jwt-decode": "^2.2.0",
     "lottie-react-native": "~2.6.1",
+    "module-resolver": "^1.0.0",
     "moment": "^2.29.1",
     "react": "16.11.0",
     "react-dom": "16.11.0",

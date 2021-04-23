@@ -14,9 +14,13 @@ import useApi from '../hooks/useApi';
 function ListingsScreen({ navigation }) {
 	const getListingsApi = useApi(listingsApi.getListings);
 
-	useEffect(() => {
-		getListingsApi.request();
-	}, []);
+	React.useEffect(() => {
+		const unsubscribe = navigation.addListener('focus', () => {
+			// Alert.alert('Refreshed');
+			getListingsApi.request();
+		});
+		return unsubscribe;
+	}, [navigation]);
 
 	return (
 		<>
@@ -30,7 +34,7 @@ function ListingsScreen({ navigation }) {
 				)}
 				<FlatList
 					data={getListingsApi.data}
-					keyExtractor={(listing) => listing.id.toString()}
+					keyExtractor={(listing) => listing._id.toString()}
 					renderItem={({ item }) => (
 						<Card
 							title={item.title}

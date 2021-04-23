@@ -1,7 +1,3 @@
-import Bugsnag from "@bugsnag/expo";
+const log = (error) => console.log(error);
 
-const log = (error) => Bugsnag.notify(error);
-
-const start = () => Bugsnag.start();
-
-export default { log, start };
+export default { log };

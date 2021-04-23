@@ -9,13 +9,13 @@ import Screen from '../components/Screen';
 import useAuth from '../auth/useAuth';
 
 const menuItems = [
-	{
-		title: 'My Listings',
-		icon: {
-			name: 'format-list-bulleted',
-			backgroundColor: colors.primary,
-		},
-	},
+	// {
+	// 	title: 'My Listings',
+	// 	icon: {
+	// 		name: 'format-list-bulleted',
+	// 		backgroundColor: colors.primary,
+	// 	},
+	// },
 	{
 		title: 'My Messages',
 		icon: {
@@ -35,7 +35,7 @@ function AccountScreen({ navigation }) {
 				<ListItem
 					title={user.name}
 					subTitle={user.email}
-					image={require('../assets/sanskar.jpg')}
+					image={require('../assets/user.jpg')}
 				/>
 			</View>
 			<View style={styles.container}>

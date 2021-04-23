@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FlatList, StyleSheet, View } from 'react-native';
+import messagessApi from '../api/messages';
+import userApi from '../api/user';
 
 import Screen from '../components/Screen';
 import {
@@ -8,58 +10,51 @@ import {
 	ListItemSeparator,
 } from '../components/lists';
 
-const initialMessages = [
-	{
-		id: 1,
-		title: 'Sanskar',
-		description: 'Hey! Is this item still available?',
-		image: require('../assets/sanskar.jpg'),
-	},
-	{
-		id: 2,
-		title: 'Sanskar',
-		description:
-			"I'm interested in this item. When will you be able to post it?",
-		image: require('../assets/sanskar.jpg'),
-	},
-];
-
 function MessagesScreen(props) {
-	const [messages, setMessages] = useState(initialMessages);
+	var messages = useApi(messagessApi.get);
+	const users = useApi(userApi.getUser);
+	const dmessage = useApi(messagessApi.deletem);
 	const [refreshing, setRefreshing] = useState(false);
 
+	useEffect(() => {
+		messages.request();
+		users.request();
+	}, []);
+
+	const getUser = (id) => {
+		const user = users.data.find((x) => x._id === id);
+		// console.log(user);
+
+		if (user == undefined) return 'Consumer';
+		return user.name;
+	};
+
 	const handleDelete = (message) => {
-		// Delete the message from messages
-		setMessages(messages.filter((m) => m.id !== message.id));
+		messages.data = messages.data.filter((m) => m._id !== message._id);
+		dmessage.request(message._id);
+		messages.request();
 	};
 
 	return (
 		<Screen>
 			<FlatList
-				data={messages}
-				keyExtractor={(message) => message.id.toString()}
+				data={messages.data}
+				keyExtractor={(message) => message._id.toString()}
 				renderItem={({ item }) => (
 					<ListItem
-						title={item.title}
-						subTitle={item.description}
-						image={item.image}
+						title={getUser(item.fromUserId)}
+						subTitle={item.content}
+						image={require('../assets/user.jpg')}
 						onPress={() => console.log('Message selected', item)}
-						renderRightActions={() => (
-							<ListItemDeleteAction onPress={() => handleDelete(item)} />
-						)}
+						// renderRightActions={() => (
+						// 	<ListItemDeleteAction onPress={() => handleDelete(item)} />
+						// )}
 					/>
 				)}
 				ItemSeparatorComponent={ListItemSeparator}
 				refreshing={refreshing}
 				onRefresh={() => {
-					setMessages([
-						{
-							id: 2,
-							title: 'T2',
-							description: 'D2',
-							image: require('../assets/sanskar.jpg'),
-						},
-					]);
+					messages.request();
 				}}
 			/>
 		</Screen>
