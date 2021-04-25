@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "GetIt",
-    "slug": "GetIt",
+    "name": "GetiT",
+    "slug": "GetiT",
     "platforms": ["ios", "android", "web"],
     "version": "1.0.0",
     "orientation": "portrait",

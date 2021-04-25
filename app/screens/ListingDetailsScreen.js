@@ -45,6 +45,7 @@ function ListingDetailsScreen({ route }) {
 			/>
 			<View style={styles.detailsContainer}>
 				<Text style={styles.title}>{listing.title}</Text>
+				<Text style={styles.description}>{listing.description}</Text>
 				<Text style={styles.price}>₹{listing.price}</Text>
 				<View style={styles.userContainer}>
 					<ListItem
@@ -75,7 +76,12 @@ const styles = StyleSheet.create({
 	},
 	title: {
 		fontSize: 24,
+		fontWeight: 'bold',
 		fontWeight: '500',
+	},
+	description: {
+		marginVertical: 5,
+		fontSize: 18,
 	},
 	userContainer: {
 		marginVertical: 40,
