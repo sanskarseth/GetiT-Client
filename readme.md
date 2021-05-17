@@ -8,14 +8,14 @@ This is the client-side of the app which is made with React-Native and expo.
 
 ## Installation
 
-Use the package manager [npm](https://www.npmjs.com/) to install ShoppeR-Server.
+Use the package manager [npm](https://www.npmjs.com/) to install GetiT-Client.
 
 ```bash
 npm install
 ```
 ## Running
 
-Use the package manager [npm](https://www.npmjs.com/) to run ShoppeR-Server.
+Use the package manager [npm](https://www.npmjs.com/) to run GetiT-Client.
 
 ```bash
 npm start
